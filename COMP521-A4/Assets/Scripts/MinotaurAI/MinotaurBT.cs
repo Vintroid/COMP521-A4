@@ -7,6 +7,12 @@ using BehaviourTree;
 public class MinotaurBT : BehaviourTree.Tree
 {
     // Fields for characteristics
+    public static float treasureFOV = 2f;
+    public static float minotaurFOV = 8f;
+    public static float attackRange = 2f;
+    public static float aoeDistance = 2f;
+    public static float attackCooldown = 1f;
+    public static float attackTimer = 0f;
 
     // Serialized Fields for objects and text
     [SerializeField] TMPro.TMP_Text taskText;
@@ -23,5 +29,14 @@ public class MinotaurBT : BehaviourTree.Tree
         TreeNode root = new TaskIdle(this.gameObject, taskText);
 
         return root;
+    }
+
+    // Minotaur attack cooldown has be tracked
+    private void Update()
+    {
+        if(attackTimer <= 1f)
+        {
+            attackTimer += Time.deltaTime;
+        }
     }
 }

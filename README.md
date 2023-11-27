@@ -6,6 +6,7 @@ Assets Credit:<br>
 
 Hammers/Swords/Bows: "3D Stylized Weapons" by Tridentcorp<br>
 Ground Textures: "Yughues Free Ground Materials" by Nobiax/Yughues<br>
+Attacking SFX: "Free Sound Effects Pack" by Olivier Girardot
 
 Code Credit:<br>
 
