@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MeleeAgent : Agent
 {
@@ -9,9 +10,12 @@ public class MeleeAgent : Agent
     [SerializeField] GameManager gameManager;
     [SerializeField] TMPro.TMP_Text infoText;
 
+    NavMeshAgent agent;
+
     void Awake()
     {
         health = 4;
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Taking hit from the minotaur
@@ -53,5 +57,21 @@ public class MeleeAgent : Agent
         GameObject newTreasure = GameObject.Instantiate(gameManager.treasure,
             new Vector3(pos.x, 0.6f, pos.z), gameManager.treasure.transform.rotation);
         gameManager.treasurePosition = newTreasure.transform.position;
+
+        // Updating the treasure coordinates in world space
+        gameManager.treasurePosition = newTreasure.transform.position;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            {
+                agent.destination = hit.point;
+            }
+        }
     }
 }

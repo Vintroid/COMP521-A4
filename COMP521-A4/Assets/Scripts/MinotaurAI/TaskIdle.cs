@@ -8,9 +8,9 @@ public class TaskIdle : TreeNode
 {
     private GameObject minotaur;
     private TMPro.TMP_Text taskText;
-    public TaskIdle(GameObject obj, TMPro.TMP_Text taskText)
+    public TaskIdle(GameObject minotaur, TMPro.TMP_Text taskText)
     {
-        this.minotaur = obj;
+        this.minotaur = minotaur;
         this.taskText = taskText;
     }
 
@@ -21,8 +21,7 @@ public class TaskIdle : TreeNode
         taskText.text = "Idle";
         taskText.color = Color.green;
 
-        minotaur.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity = Vector3.zero;
-        minotaur.GetComponent<UnityEngine.AI.NavMeshAgent>().isStopped = true;
+        minotaur.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(minotaur.transform.position);
 
         state = NodeState.RUNNING;
         return state;

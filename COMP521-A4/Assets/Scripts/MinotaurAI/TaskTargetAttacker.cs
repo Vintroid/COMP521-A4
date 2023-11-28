@@ -12,10 +12,12 @@ public class TaskTargetAttacker : TreeNode
 
     private TMPro.TMP_Text taskText;
 
-    public TaskTargetAttacker(GameManager gameManager, GameObject minotaur)
+    public TaskTargetAttacker(GameManager gameManager, GameObject minotaur,
+        TMPro.TMP_Text taskText)
     {
         this.gameManager = gameManager;
         this.minotaur = minotaur;
+        this.taskText = taskText;
     }
 
     public override NodeState Evaluate()
@@ -29,9 +31,9 @@ public class TaskTargetAttacker : TreeNode
             // Looking if last attacker still exists
             if(gameManager.currentMinotaurAttacker != null)
             {
-                // Looking at all adventurers within attack range
+                // Looking at all adventurers within minotaur FOV
                 Collider[] colliders = Physics.OverlapSphere(minotaur.transform.position,
-                    MinotaurBT.attackRange,adventurerLayer);
+                    MinotaurBT.minotaurFOV,adventurerLayer);
 
                 if(colliders.Length > 0)
                 {
@@ -40,20 +42,24 @@ public class TaskTargetAttacker : TreeNode
                         if(c.gameObject == gameManager.currentMinotaurAttacker)
                         {
                             // Targetting attacker by storing gameobject in the shared data
-                            parent.parent.SetData("target", c.gameObject);
+                            parent.parent.parent.SetData("target", c.gameObject);
 
-                            // Returning success for sequence node
+                            // Change the text current task to moving
+                            taskText.text = "Moving";
+                            taskText.color = Color.blue;
+
+                            // Returning success for selector node
                             state = NodeState.SUCCESS;
                             return state;
                         }
                     }
                 }
 
-                // No target found
-                state = NodeState.FAILURE;
-                return state;
-
             }
+
+            // No target found
+            state = NodeState.FAILURE;
+            return state;
         }
 
         // Target already set

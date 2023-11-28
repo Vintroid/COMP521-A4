@@ -7,11 +7,12 @@ using BehaviourTree;
 public class TaskAttack : TreeNode
 {
     GameManager gameManager;
+    LayerMask adventurerLayer = 1 << 7;
 
     // Target info
     Agent agent;
 
-    TaskAttack(GameManager gameManager)
+    public TaskAttack(GameManager gameManager)
     {
         this.gameManager = gameManager;
     }
@@ -26,10 +27,19 @@ public class TaskAttack : TreeNode
             // Checking if attack is on cooldown or not
             if (MinotaurBT.attackCooldown <= MinotaurBT.attackTimer)
             {
-                // Make the agent take a hit
-                agent = target.GetComponent<Agent>();
-                agent.TakeHit();
-                AudioSource.PlayClipAtPoint(gameManager.minotaurSmash, Vector3.zero, 0.5f);
+                // Make all agents in AOE take the hit
+                // Looking at all adventurers within minotaur smash AOE
+                Collider[] colliders = Physics.OverlapSphere(target.transform.position,
+                    MinotaurBT.aoeDistance, adventurerLayer);
+
+                foreach(Collider c in colliders)
+                {
+                    agent = c.gameObject.GetComponent<Agent>();
+                    agent.TakeHit();
+                }
+                
+                AudioSource.PlayClipAtPoint(gameManager.minotaurSmash, Vector3.zero, 1f);
+
 
                 // Resetting attack timer
                 MinotaurBT.attackTimer = 0f;

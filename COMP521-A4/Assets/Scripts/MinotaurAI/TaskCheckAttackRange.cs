@@ -30,11 +30,16 @@ public class TaskCheckAttackRange : TreeNode
         }
 
         // Looking if target is in current attack range
-        Transform targetPosition = (Transform)target;
+        // Get target's position from shared data
+        GameObject targetObj = (GameObject)GetData("target");
+        Transform targetPosition = targetObj.transform;
+
         if (Vector3.Distance(minotaur.transform.position, targetPosition.position) <= MinotaurBT.attackRange)
         {
+            // Change minotaur current task text
             taskText.text = "Attacking";
             taskText.color = Color.red;
+
             state = NodeState.SUCCESS;
             return state;
         }

@@ -53,5 +53,8 @@ public class RangedAgent : Agent
         GameObject newTreasure = GameObject.Instantiate(gameManager.treasure,
             new Vector3(pos.x, 0.6f, pos.z), gameManager.treasure.transform.rotation);
         gameManager.treasurePosition = newTreasure.transform.position;
+
+        // Updating the treasure coordinates in world space
+        gameManager.treasurePosition = newTreasure.transform.position;
     }
 }
