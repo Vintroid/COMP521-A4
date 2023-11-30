@@ -7,6 +7,9 @@ public abstract class Agent : MonoBehaviour
     // Fields
     protected float health;
 
+    // World state fields
+    
+
     public abstract bool TakeHit(); 
 
     // No more health means adventurer disappears from the map

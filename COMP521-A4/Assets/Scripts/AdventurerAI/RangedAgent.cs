@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RangedAgent : Agent
 {
@@ -8,9 +9,12 @@ public class RangedAgent : Agent
     [SerializeField] GameManager gameManager;
     [SerializeField] TMPro.TMP_Text infoText;
 
+    NavMeshAgent agent;
+
     void Awake()
     {
         health = 2;
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Taking hit from the minotaur
@@ -56,5 +60,18 @@ public class RangedAgent : Agent
 
         // Updating the treasure coordinates in world space
         gameManager.treasurePosition = newTreasure.transform.position;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            {
+                agent.destination = hit.point;
+            }
+        }
     }
 }

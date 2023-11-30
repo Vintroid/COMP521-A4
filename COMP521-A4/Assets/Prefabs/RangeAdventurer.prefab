@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3992297865577448177}
   - component: {fileID: 2915237299805226328}
   - component: {fileID: 99742484652398041}
+  - component: {fileID: 1293002752}
   m_Layer: 7
   m_Name: RangeAdventurer
   m_TagString: Player
@@ -123,6 +124,20 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1293002752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569697079297338525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caea3cd23358e914fa8ce44c5373c0a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  infoText: {fileID: 1980520526609479422}
 --- !u!1001 &1942656958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,6 +145,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1706240125188634957}
     m_Modifications:
+    - target: {fileID: 1980520524700705088, guid: 911e35c9bd91f03469abd269274ed604,
+        type: 3}
+      propertyPath: m_text
+      value: Idle, HP:2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1980520524700705089, guid: 911e35c9bd91f03469abd269274ed604,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 1980520525291568933, guid: 911e35c9bd91f03469abd269274ed604,
         type: 3}
       propertyPath: m_Name
@@ -173,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 1980520525291568985, guid: 911e35c9bd91f03469abd269274ed604,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1980520525291568985, guid: 911e35c9bd91f03469abd269274ed604,
         type: 3}
@@ -253,6 +278,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1942656958}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1980520526609479422 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1980520524700705088, guid: 911e35c9bd91f03469abd269274ed604,
+    type: 3}
+  m_PrefabInstance: {fileID: 1942656958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2022853426664945674
 PrefabInstance:
   m_ObjectHideFlags: 0
